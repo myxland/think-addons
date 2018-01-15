@@ -2,7 +2,10 @@ Thinkphp5.1 扩展Addon
 ======
 
 ## 安装
-> composer require myxland/think-addons
+~~~
+composer require myxland/think-addons
+php think myxland-addons:config
+~~~
 
 ## 创建插件
 > 创建的插件可以在view视图中使用，也可以在php业务中使用

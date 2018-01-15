@@ -11,7 +11,7 @@ class SendConfig extends Command
 {
     public function configure()
     {
-        $this->setName('addons:config')->setDescription('send config to tp folder');
+        $this->setName('myxland-addons:config')->setDescription('send config to tp folder');
     }
 
     public function execute(Input $input, Output $output)
