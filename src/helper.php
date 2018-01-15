@@ -6,6 +6,7 @@
 
 use think\Loader;
 use think\facade\App;
+use think\facade\Env;
 use think\facade\Hook;
 use think\facade\Config;
 use think\facade\Cache;
@@ -34,10 +35,10 @@ Hook::add('app_init', function () {
         return;
     }
     // 当debug时不缓存配置
-    $config = App::$debug ? [] : Cache::get('addons', []);
+    $config = config('app.app_debug') ? [] : Cache::get('addons', []);
     if (empty($config)) {
         // 读取addons的配置
-        $config = (array) Config::get('addons');
+        $config = config('addons.');
         // 读取插件目录及钩子列表
         $base = get_class_methods("\\myxland\\Addons");
         // 读取插件目录中的php文件
@@ -67,16 +68,16 @@ Hook::add('app_init', function () {
                 }
             }
         }
-        Cache::set('addons', $config);
+        config($config, 'addons');
     }
-    Config::set('addons', $config);
+    config($config, 'addons');
 });
 
 // 闭包初始化行为
 Hook::add('action_begin', function () {
     // 获取系统配置
-    $data   = App::$debug ? [] : Cache::get('hooks', []);
-    $addons = (array) Config::get('addons.hooks');
+    $data   = config('app.app_debug') ? [] : Cache::get('hooks', []);
+    $addons = (array) config('addons.hooks');
     if (empty($data)) {
         // 初始化钩子
         foreach ($addons as $key => $values) {

@@ -10,7 +10,7 @@ use think\facade\Hook;
  *
  * @package myxland\addons\library
  */
-class Route extends Controller
+class Route extends AddonController
 {
     /**
      * 插件执行

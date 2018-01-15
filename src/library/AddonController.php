@@ -3,6 +3,7 @@
 namespace myxland\addons\library;
 
 use think\Loader;
+use think\Controller;
 
 /**
  * 插件基类控制器
@@ -10,7 +11,7 @@ use think\Loader;
  *
  * @package myxland\addons\library
  */
-class Controller extends \think\Controller
+class AddonController extends Controller
 {
     // 当前插件操作
     protected $addon = null;
@@ -46,12 +47,12 @@ class Controller extends \think\Controller
         // 生成request对象
         $this->request = is_null($request) ? request() : $request;
         // 初始化配置信息
-        $this->config = config('template') ?: $this->config;
+        $this->config = config('template.') ?: $this->config;
         // 处理路由参数
         $route = $this->request->param('route', '');
         $param = explode('-', $route);
         // 是否自动转换控制器和操作名
-        $convert = config('url_convert');
+        $convert = config('app.url_convert');
         // 格式化路由的插件位置
         $this->action     = $convert ? strtolower(array_pop($param)) : array_pop($param);
         $this->controller = $convert ? strtolower(array_pop($param)) : array_pop($param);

@@ -47,7 +47,7 @@ abstract class Addons
     public function __construct()
     {
         // 获取当前插件目录
-        $this->addons_path = ADDON_PATH . $this->getName() . DS;
+        $this->addons_path = ADDON_PATH . $this->getName() . DIRECTORY_SEPARATOR;
         // 读取当前插件配置信息
         if (is_file($this->addons_path . 'config.php')) {
             $this->config_file = $this->addons_path . 'config.php';
@@ -55,8 +55,8 @@ abstract class Addons
 
         // 初始化视图模型
         $config     = ['view_path' => $this->addons_path];
-        $config     = array_merge(config('template'), $config);
-        $this->view = new View($config, config('view_replace_str'));
+        $config     = array_merge(config('template.'), $config);
+        $this->view = new View($config, config('template.tpl_replace_string'));
 
         // 控制器初始化
         if (method_exists($this, 'initialize')) {
