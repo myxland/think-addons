@@ -4,7 +4,7 @@ Thinkphp5.1 扩展Addon
 ## 安装
 ~~~
 composer require myxland/think-addons
-php think myxland-addons:config
+php think addons:config
 ~~~
 
 ## 创建插件
